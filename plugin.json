@@ -1,0 +1,12 @@
+{
+  "ID": "ef9bbc14-cde0-4b22-b34c-0c6d91db10bf",
+  "ActionKeyword": "ac",
+  "Name": "Authenticator",
+  "Description": "Authenticator",
+  "Author": "Wayne Custaf Laqinoa Ferdon",
+  "Version": "1.0.0",
+  "Language": "python",
+  "Website": "https://www.github.com/wayneferdon/Wox.Base.Plugin.Authenticator",
+  "IcoPath": "./Images/Icon.png",
+  "ExecuteFileName": "main.py"
+}
