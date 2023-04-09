@@ -7,6 +7,6 @@
   "Version": "1.0.0",
   "Language": "python",
   "Website": "https://www.github.com/wayneferdon/Wox.Base.Plugin.Authenticator",
-  "IcoPath": "./Images/Icon.png",
+  "IcoPath": "./Images/Authenticator.png",
   "ExecuteFileName": "main.py"
 }

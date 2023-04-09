@@ -1,14 +1,25 @@
+# ----------------------------------------------------------------
+# Author: WayneFerdon wayneferdon@hotmail.com
+# Date: 2023-04-08 03:54:41
+# LastEditors: WayneFerdon wayneferdon@hotmail.com
+# LastEditTime: 2023-04-09 11:22:05
+# FilePath: \FlowLauncher\Plugins\Wox.Base.Plugin.Authenticator\main.py
+# ----------------------------------------------------------------
+# Copyright (c) 2023 by Wayne Ferdon Studio. All rights reserved.
+# Licensed to the .NET Foundation under one or more agreements.
+# The .NET Foundation licenses this file to you under the MIT license.
+# See the LICENSE file in the project root for more information.
+# ----------------------------------------------------------------
+
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from WoxPluginBase_Query import *
 from AuthenticatorClient import *
 
-from qrcode.image.pure import PyPNGImage
-
 class Authenticator(QueryPlugin):
     def query(self, query:str):
         results = list[QueryResult]()
-        icon = QueryPlugin.defaultIcon
+        icon = self.defaultIcon
         first_query = query.split(' ')[0]
         if first_query == 'add':
             args = AuthenticatorClient.load_args(query.split(' '))
@@ -87,7 +98,7 @@ class Authenticator(QueryPlugin):
             return save
 
     def open_qr(self, qr:str):
-        os.system('start ./generated/' + qr)
+        os.popen('start ./generated/' + qr)
         return
     
     def context_menu(self, args:str) -> list[QueryResult]:

@@ -2,7 +2,7 @@
 # Author: WayneFerdon wayneferdon@hotmail.com
 # Date: 2023-04-05 19:48:53
 # LastEditors: WayneFerdon wayneferdon@hotmail.com
-# LastEditTime: 2023-04-08 07:30:28
+# LastEditTime: 2023-04-09 11:41:53
 # FilePath: \FlowLauncher\Plugins\Wox.Base.Plugin.Authenticator\AuthenticatorClient.py
 # ----------------------------------------------------------------
 # Copyright (c) 2023 by Wayne Ferdon Studio. All rights reserved.
@@ -43,7 +43,8 @@ class VerifyData():
         self.remain_time = remain_time
 
     def display(self):
-        output = Fore.GREEN + f"{self.issuer}({self.name})" + '\n'
+        output = "\033"
+        output += Fore.GREEN + f"{self.issuer}({self.name})" + '\n'
         output += Fore.BLUE + "Current code: "
         output += Fore.RED + self.code + '\t'
         output += Fore.CYAN + f"Remain: {self.remain_time}s"
@@ -124,22 +125,20 @@ class AuthenticatorClient:
                 os.makedirs(dir)
         path = os.path.join(dir, file)
         if os.path.isfile(path):
-            return
             # print(f'image already exist: {path}')
-        else:
-            img.save(path)
-            # print(f'image saved: {path}')
-            with open('./generated/saved.json','r',encoding='utf-8') as f:
-                saved = list(json.loads(f.read()))
-                save = dict()
-                save['Name'] = name
-                save['Issuer'] = issuer
-                save['Secret'] = self.secret
-                save['QR'] = file
-                saved.append(save)
-            with open('./generated/saved.json','w',encoding='utf-8') as f:
-                f.write(json.dumps(saved))
-        return
+            return
+        img.save(path)
+        with open('./generated/saved.json','r',encoding='utf-8') as f:
+            saved = list(json.loads(f.read()))
+            save = dict()
+            save['Name'] = name
+            save['Issuer'] = issuer
+            save['Secret'] = self.secret
+            save['QR'] = file
+            saved.append(save)
+        with open('./generated/saved.json','w',encoding='utf-8') as f:
+            f.write(json.dumps(saved))
+        # print(f'image saved: {path}')
     
     def verify(self, code):
         return pyotp.TOTP(self.secret).verify(code)
